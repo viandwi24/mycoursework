@@ -1,11 +1,5 @@
 package manajemenbarang;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-
-import manajemenbarang.Input;
-
 /**
  *
  * @author viandwi24
