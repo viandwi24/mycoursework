@@ -22,6 +22,7 @@ public class Main {
     
     public static void menu()
     {
+        clear();
         banner();
         System.out.println("==[ MENU");
         System.out.println("[1] Barang");
@@ -44,15 +45,17 @@ public class Main {
     
     public static void barang()
     {
+        clear();
         banner();
         System.out.println("==[ BARANG");
-        if (database.getBarang().length == 0)
+        Barang[] listBarang = database.getBarang();
+        if (listBarang.length == 0)
         {
             System.out.println("Tidak ada item.");
         }
-        for (int i = 0; i < database.getBarang().length; i++)
+        for (int i = 0; i < listBarang.length; i++)
         {
-            Barang barang = database.getBarang()[i];
+            Barang barang = listBarang[i];
             System.out.println("[" + (i+1) + "] " + barang.getName() + " - Rp" + barang.getCost());
         }
         
@@ -63,6 +66,9 @@ public class Main {
         System.out.println("[2] Hapus");
         System.out.println("[0] Main Menu");
         Integer selectedMenu = input.getInt("Pilih Menu : ");
+
+        clear();
+        banner();
         switch (selectedMenu)
         {
             case 1:
@@ -79,7 +85,11 @@ public class Main {
             case 2:
                 System.out.println("==[ HAPUS BARANG");
                 Integer number = input.getInt("Nomor Barang Yang Ingin Dihapus : ");
-                database.barang.remove(number-1);
+                try {
+                    database.barang.remove(number-1);
+                } catch (Exception e) {
+                    System.out.println("Gagal menghapus");
+                }
                 barang();
                 break;
                 
@@ -90,17 +100,19 @@ public class Main {
     
     public static void karyawan()
     {
+        clear();
         banner();
         
         // menampilkan semua karyawan
+        Karyawan[] listKaryawan = database.getKaryawan();
         System.out.println("==[ KARYAWAN");
-        if (database.getKaryawan().length == 0)
+        if (listKaryawan.length == 0)
         {
             System.out.println("Tidak ada item.");
         }
-        for (int i = 0; i < database.getKaryawan().length; i++)
+        for (int i = 0; i < listKaryawan.length; i++)
         {
-            Karyawan karyawan = database.getKaryawan()[i];
+            Karyawan karyawan = listKaryawan[i];
             System.out.println("[" + (i+1) + "] " + karyawan.getName());
         }
         
@@ -110,6 +122,9 @@ public class Main {
         System.out.println("[1] Tambah");
         System.out.println("[2] Hapus");
         System.out.println("[0] Main Menu");
+
+        clear();
+        banner();
         Integer selectedMenu = input.getInt("Pilih Menu : ");
         switch (selectedMenu)
         {
@@ -125,12 +140,36 @@ public class Main {
             case 2:
                 System.out.println("==[ HAPUS KARYAWAN");
                 Integer number = input.getInt("Nomor Karyawan Yang Ingin Dihapus : ");
-                database.barang.remove(number-1);
+                try {
+                    database.barang.remove(number-1);
+                } catch (Exception e) {
+                    System.out.println("Gagal menghapus");
+                }
                 karyawan();
                 break;
                 
             default:
                 menu();
+        }
+    }
+
+    public static void clear()
+    {
+        try
+        {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows"))
+            {
+                Runtime.getRuntime().exec("cls");
+            }
+            else
+            {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e)
+        {
         }
     }
 }
