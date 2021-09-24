@@ -1,7 +1,7 @@
 /*
  * @author viandwi24
  */
-package Tugas5.satu;
+package Tugas5.tiga;
 
 public class Student extends Person {
     public Student() {

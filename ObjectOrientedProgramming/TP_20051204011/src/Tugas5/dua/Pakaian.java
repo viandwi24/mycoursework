@@ -1,3 +1,6 @@
+/*
+ * @author viandwi24
+ */
 package Tugas5.dua;
 
 public class Pakaian {
